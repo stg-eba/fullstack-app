@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import './output.css';
 import { useAuth } from './AuthContext';
 
-const role = 'USER';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -18,7 +17,7 @@ const Navbar = () => {
                 credentials: 'include',
             });
 
-            setAuth(null); // Clear auth state
+            setAuth(null);
             navigate('/login');
         } catch (err) {
             console.error('Logout failed:', err);
@@ -28,25 +27,26 @@ const Navbar = () => {
     return (
         <nav className="flex items-center justify-between  p-4 shadow">
             <div className="flex gap-6 text-sm">
-                <Link to="/common" className="bg-gray-600 text-white px-4 py-1 rounded text-sm hover:bg-gray-700">Home page</Link>
-                {role === 'USER' && (
-                    <Link to="/users" className="bg-gray-600 text-white px-4 py-1 rounded text-sm hover:bg-gray-700">User Page</Link>
-                )}
-                <div className="flex items-center gap-2">
-                    <Link to="/user/list" className="bg-gray-600 text-white px-4 py-1 rounded text-sm hover:bg-gray-700">
-                        Task list
-                    </Link>
+                <Link to="/" className="bg-gray-600 text-white px-4 py-1 rounded text-sm hover:bg-gray-700">ホームページ</Link>
+                <Link to="/users" className="bg-gray-600 text-white px-4 py-1 rounded text-sm hover:bg-gray-700">ユーザーページ</Link>
+                <Link to="/tasks" className="bg-gray-600 text-white px-4 py-1 rounded hover:bg-gray-700">タスクモニター</Link>
+                <Link to="/todo/list" className="bg-gray-600 text-white px-4 py-1 rounded text-sm hover:bg-gray-700">
+                    Todoリスト
+                </Link>
 
-                </div>
+
             </div>
 
 
-            <button
-                onClick={handleLogout}
-                className="bg-red-600 text-black px-4 py-1 rounded text-sm hover:bg-red-500"
-            >
-                Logout
-            </button>
+            <div className="flex items-center gap-4">
+                {auth.username && <span className="text-gray-700 text-sm">ようこそ, {auth.username}さん</span>}
+                <button
+                    onClick={handleLogout}
+                    className="bg-red-600 text-white px-4 py-1 rounded text-sm hover:bg-red-700" // text-black -> text-white
+                >
+                    ログアウト
+                </button>
+            </div>
         </nav>
     );
 };
