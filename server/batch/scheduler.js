@@ -77,7 +77,7 @@ const scheduledTaskWrapper = async (taskRecord) => {
 const initializeScheduler = async () => {
   console.log('Initializing scheduler...');
   const tasksToSchedule = [
-    { name: 'MinuteTask', cronSchedule: '* * * * *' },
+    { name: 'MinuteTask', cronSchedule: '*/5 * * * *' },
     { name: 'DailyCleanup', cronSchedule: '0 3 * * *' },
     // 他のタスク定義
   ];
